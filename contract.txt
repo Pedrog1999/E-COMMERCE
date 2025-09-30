@@ -1,0 +1,12 @@
+e-commerce
+
+login (index)
+
+tabla de productos 
+
+carrito
+
+backoffice agregar borrar productos
+
+index publico - index backoffice
+
