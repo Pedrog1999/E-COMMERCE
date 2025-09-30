@@ -38,4 +38,20 @@ function actualizarContacto($pdo, $id, $nombre, $telefono, $email, $direccion) {
     $stmt = $pdo->prepare("UPDATE agenda SET nombre=?, telefono=?, email=?, direccion=? WHERE id=?");
     $stmt->execute([$nombre, $telefono, $email, $direccion, $id]);
 }
+
+
+function crearUsuario($usuario, $password, $admin = 0) {
+    global $pdo; 
+
+    
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE name = ?");
+    $stmt->execute([$usuario]);
+    if ($stmt->fetch()) {
+        return false; 
+    }
+
+    
+    $stmt = $pdo->prepare("INSERT INTO users (name, password, admin) VALUES (?, ?, ?)");
+    return $stmt->execute([$usuario, $password, $admin]);
+}
 ?>
