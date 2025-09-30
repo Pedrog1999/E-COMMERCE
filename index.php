@@ -46,7 +46,7 @@
                 Don’t have an account? <a href="views/register.php">Create one</a>
             </p>
         </div>
-    </div>
+    </div> 
            <div class="github-container">
   <a href="https://github.com/Pedrog1999/E-COMMERCE.git" target="_blank" class="github-button">
     <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
