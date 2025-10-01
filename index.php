@@ -5,22 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-commerce Login</title>
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-  
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+<button id="freno-button" class="freno" title="Activar/Desactivar freno">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="40" height="40">
+    <polygon points="30,0 90,0 120,30 120,90 90,120 30,120 0,90 0,30" fill="red" stroke="white" stroke-width="6"/>
+    <text x="50%" y="60%" text-anchor="middle" fill="white" font-size="32" font-family="Arial Black" dy=".3em">STOP</text>
+  </svg>
+  
+</button>
+
+
   <div class="login-container">
     <div class="login-card animate__animated animate__fadeInDown">
       <h1 class="login-title">Welcome to Giani Import Solutions</h1>
@@ -46,12 +48,38 @@
       </p>
     </div>
 
-    
     <div class="github-container">
       <a href="https://github.com/Pedrog1999/E-COMMERCE.git" target="_blank" class="github-button">
         <i class="fab fa-github"></i> Open in GitHub
       </a>
     </div>
   </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector(".github-button");
+    const freno = document.getElementById("freno-button");
+
+    let frenado = false;
+
+    button.addEventListener("mouseenter", () => {
+      if (frenado) return; 
+
+      const offsetX = (Math.random() - 0.5) * window.innerWidth * 0.6;
+      const offsetY = (Math.random() - 0.5) * window.innerHeight * 0.6;
+
+      button.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+      setTimeout(() => {
+        button.style.transform = "translate(0,0)";
+      }, 1000);
+    });
+
+    freno.addEventListener("click", () => {
+      frenado = !frenado;
+      freno.style.background = frenado ? "green" : "crimson";
+    });
+  });
+</script>
 </body>
 </html>
