@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="assets/style.css">
+  
 </head>
 <body>
 
@@ -19,7 +20,7 @@
     <polygon points="30,0 90,0 120,30 120,90 90,120 30,120 0,90 0,30" fill="red" stroke="white" stroke-width="6"/>
     <text x="50%" y="60%" text-anchor="middle" fill="white" font-size="32" font-family="Arial Black" dy=".3em">STOP</text>
   </svg>
-  
+
 </button>
 
 
