@@ -8,14 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($usuario) || empty($password)) {
         $_SESSION['error'] = "All fields are required.";
-        header("Location: ../register.php");
+        header("Location: ../views/register.php");
         exit;
     }
 
-    // Hashear contraseña
+    //hasheamos contraseña, me faltaría verificar y comparar
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Intentar crear usuario
+    
     $result = crearUsuario($usuario, $hash, 0); // admin=0 por defecto
 
     if ($result) {
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     } else {
         $_SESSION['error'] = "Username already exists.";
-        header("Location: ../register.php");
+        header("Location: ../views/register.php");
         exit;
     }
 }
