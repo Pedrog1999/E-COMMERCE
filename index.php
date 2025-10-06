@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+function mostrarMensaje($tipo) {
+    if (isset($_SESSION[$tipo])) {
+        echo '<div class="alert alert-' . ($tipo === 'error' ? 'danger' : 'success') . ' text-center">' . $_SESSION[$tipo] . '</div>';
+        unset($_SESSION[$tipo]);
+        session_write_close(); 
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,16 +40,28 @@
     <div class="login-card animate__animated animate__fadeInDown">
       <h1 class="login-title">Welcome to Giani Import Solutions</h1>
       <p class="login-subtitle">Enter your credentials to continue</p>
+
+      <?php if (isset($_SESSION['error'])): ?>
+  <div class="alert alert-danger text-center">
+    <?= $_SESSION['error']; ?>
+  </div>
+  <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
+<?= mostrarMensaje('error'); ?>
+<?= mostrarMensaje('success'); ?>
+
+
               
       <form method="POST" action="controllers/LoginController.php" id="login-form">
         <div class="form-group">
           <label for="usuario"><i class="fa fa-user"></i> User</label>
-          <input type="text" id="usuario" name="usuario" placeholder="Your user" required>
+          <input type="text" id="usuario" name="usuario" placeholder="Your user">
         </div>
 
         <div class="form-group">
           <label for="password"><i class="fa fa-lock"></i> Password</label>
-          <input type="password" id="password" name="password" placeholder="********" required>
+          <input type="password" id="password" name="password" placeholder="********">
         </div>
 
         <button type="submit" class="btn-login animate__animated animate__pulse">Log-in</button>

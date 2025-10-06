@@ -26,7 +26,7 @@ exit;
         }
         exit;
     } else {
-        $_SESSION['error'] = "Credenciales inválidas.";
+        $_SESSION['error'] = "invalid credentials, please try again.";
         header("Location: ../index.php");
         exit;
     }

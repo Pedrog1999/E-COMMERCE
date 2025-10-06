@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+function mostrarMensaje($tipo) {
+    if (isset($_SESSION[$tipo])) {
+        echo '<div class="alert alert-' . ($tipo === 'error' ? 'danger' : 'success') . ' text-center">' . $_SESSION[$tipo] . '</div>';
+        unset($_SESSION[$tipo]);
+        session_write_close();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,6 +25,10 @@
         <div class="auth-card">
             <h1 class="auth-title">Create Account</h1>
             <p class="auth-subtitle">Fill the form to register</p>
+            
+<?= mostrarMensaje('error'); ?>
+<?= mostrarMensaje('success'); ?>
+
             
             <form method="POST" action="../controllers/RegisterController.php">
                 <div class="form-group">
