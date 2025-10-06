@@ -19,10 +19,12 @@ function mostrarMensaje($tipo) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 </head>
 <body>
     <div class="auth-container">
-        <div class="auth-card">
+        <div class="auth-card animate__animated animate__fadeInDown">
             <h1 class="auth-title">Create Account</h1>
             <p class="auth-subtitle">Fill the form to register</p>
             
@@ -41,7 +43,7 @@ function mostrarMensaje($tipo) {
                     <input type="password" id="password" name="password" class="form-input" placeholder="********" required>
                 </div>
 
-                <button type="submit" class="btn-auth">Register</button>
+                <button type="submit" class="btn-auth animate__animated animate__pulse">Register</button>
             </form>
 
             <p class="auth-footer">

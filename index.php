@@ -68,7 +68,7 @@ function mostrarMensaje($tipo) {
       </form>
 
       <p class="text-center mt-3 text-muted">
-        Forgot your password? <a href="#">Recover it</a><br>
+        Forgot your password? <a href="views/recoverit.php">Recover it</a><br>
         Don’t have an account? <a href="views/register.php">Create one</a>
       </p>
     </div>
