@@ -122,19 +122,66 @@ body {
   background: #444;
 }
 
-.freno {
+
+.btn-freno {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: transparent;
-  border: none;
+  padding: 0 18px;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  font-family: "Arial Black", sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
   cursor: pointer;
-  padding: 0;
-  z-index: 9999; 
+  line-height: 45px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
 }
 
-.freno svg {
-  display: block;
+
+.btn-freno:hover {
+  color: #00bcd4;
+  box-shadow: 0 0 12px rgba(0,188,212,0.5), 0 3px 6px rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+
+/* Botón de Tecnologías */
+.btn-tecnologias {
+  position: fixed;
+  top: 22px;
+  left: 25px;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(145deg, #1a1a1a, #101010);
+  border: 1px solid #2a2a2a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cfcfcf;
+  font-size: 1.4rem;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.04), inset 0 0 8px rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.btn-tecnologias:hover {
+  color: #00bcd4;
+  transform: rotate(10deg) scale(1.05);
+  box-shadow: 0 0 15px rgba(0,188,212,0.25), inset 0 0 8px rgba(0,188,212,0.15);
+}
+
+.btn-tecnologias i {
+  transition: transform 0.5s ease;
+}
+
+.btn-tecnologias:hover i {
+  transform: rotate(180deg);
 }
 
 

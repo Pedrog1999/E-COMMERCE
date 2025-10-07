@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     
-    $result = crearUsuario($usuario, $hash, 0); // admin=0 por defecto
+    $result = crearUsuario($usuario, $hash, 0); // admin=0 
 
     if ($result) {
         $_SESSION['success'] = "Account created successfully! You can log in now.";

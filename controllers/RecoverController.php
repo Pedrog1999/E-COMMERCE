@@ -29,7 +29,7 @@ try {
 
     $hash = $row['password'];
 
-    $msg = "<strong>Hash para usuario " . htmlspecialchars($username) . ":</strong><br><code>" . htmlspecialchars($hash) . "</code>";
+    $msg = "<strong> Here's your hash, sir. " . htmlspecialchars($username) . ":</strong><br><code>" . htmlspecialchars($hash) . "</code>";
     $_SESSION['success'] = $msg;
     header("Location: ../views/recoverit.php");
     exit;

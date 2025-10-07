@@ -14,7 +14,7 @@
   <div class="auth-container">
     <div class="auth-card animate__animated animate__fadeInDown">
       <h1 class="auth-title">Take your Hash.</h1>
-      <p class="auth-subtitle">Ingresá tu username para ver el hash almacenado (modo demo)</p>
+      <p class="auth-subtitle">Enter your username (DEMO MODE) </p>
 
       <?php
       if (isset($_SESSION['error'])) {

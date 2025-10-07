@@ -26,7 +26,7 @@ function mostrarMensaje($tipo) {
     <div class="auth-container">
         <div class="auth-card animate__animated animate__fadeInDown">
             <h1 class="auth-title">Create Account</h1>
-            <p class="auth-subtitle">Fill the form to register</p>
+            <p class="auth-subtitle">Please, complete the form to register</p>
             
 <?= mostrarMensaje('error'); ?>
 <?= mostrarMensaje('success'); ?>

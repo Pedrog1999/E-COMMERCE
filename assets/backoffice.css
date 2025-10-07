@@ -1,0 +1,113 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #1f1f1f;
+  color: #e4e4e4;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  background: #2b2b2b;
+  width: 250px;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  border-right: 1px solid #3a3a3a;
+}
+
+.logo {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #3a3a3a;
+  padding-bottom: 1rem;
+}
+
+.menu a {
+  color: #a9a9a9;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: 0.2s;
+  padding: 0.75rem 1rem;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: #3b3b3b;
+  color: #fff;
+  transform: translateX(3px);
+}
+
+/* ---------- ICONS ---------- */
+.menu i {
+  color: #bbb;
+  width: 22px;
+  text-align: center;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+.main-content {
+  flex: 1;
+  background: #202020;
+  padding: 2rem;
+}
+
+h1 {
+  color: #f5f5f5;
+  border-bottom: 1px solid #3a3a3a;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- TABLE ---------- */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  background: #333 !important;
+  color: #f0f0f0;
+}
+
+.table td {
+  color: #ccc;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn-dark {
+  background: #444 !important;
+  border: 1px solid #555 !important;
+  color: #eee !important;
+  transition: 0.2s;
+}
+
+.btn-dark:hover {
+  background: #555 !important;
+  transform: scale(1.03);
+}
+
+.btn-secondary {
+  background: #555 !important;
+  border: none !important;
+}
+
+.btn-danger {
+  background: #a33 !important;
+  border: none !important;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  transition: 0.2s;
+}

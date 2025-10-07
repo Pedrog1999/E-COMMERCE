@@ -25,27 +25,20 @@ function mostrarMensaje($tipo) {
 
 </head>
 <body>
-  <!-- Solapa de tecnologías arriba a la izquierda -->
-  <div style="position: absolute; top: 20px; left: 20px; z-index: 100;">
-    <a href="views/tecnologias.php" class="btn btn-info">
-      <i class="fa fa-cogs"></i> Tecnologías
-    </a>
-  </div>
-  
 
-<button id="freno-button" class="freno" title="Activar/Desactivar freno">
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="40" height="40">
-    <polygon points="30,0 90,0 120,30 120,90 90,120 30,120 0,90 0,30" fill="red" stroke="white" stroke-width="6"/>
-    <text x="50%" y="60%" text-anchor="middle" fill="white" font-size="32" font-family="Arial Black" dy=".3em">STOP</text>
-  </svg>
+<a href="views/tecnologias.php" class="btn-tecnologias animate__animated animate__fadeInDown" title="Ver tecnologías utilizadas">
+  <i class="fa fa-gear"></i>
+</a>
 
+<button id="freno-button" class="btn-freno animate__animated animate__fadeInDown" title="Activar/Desactivar freno">
+  STOP
 </button>
+
 
 
   <div class="login-container">
     <div class="login-card animate__animated animate__fadeInDown">
-      <h1 class="login-title">Welcome to Giani Import Solutions</h1>
+      <h1 class="login-title">Welcome to Gianibelli Import Solutions</h1>
       <p class="login-subtitle">Enter your credentials to continue</p>
 
       <?php if (isset($_SESSION['error'])): ?>
@@ -109,7 +102,7 @@ function mostrarMensaje($tipo) {
 
     freno.addEventListener("click", () => {
       frenado = !frenado;
-      freno.style.background = frenado ? "green" : "crimson";
+      freno.style.background = frenado ? "black" : "grey";
     });
   });
 </script>
