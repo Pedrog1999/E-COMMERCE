@@ -25,6 +25,13 @@ function mostrarMensaje($tipo) {
 
 </head>
 <body>
+  <!-- Solapa de tecnologías arriba a la izquierda -->
+  <div style="position: absolute; top: 20px; left: 20px; z-index: 100;">
+    <a href="views/tecnologias.php" class="btn btn-info">
+      <i class="fa fa-cogs"></i> Tecnologías
+    </a>
+  </div>
+  
 
 <button id="freno-button" class="freno" title="Activar/Desactivar freno">
   
