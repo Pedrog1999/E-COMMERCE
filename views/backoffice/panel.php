@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../assets/backoffice.css">
+  <link rel="stylesheet" href="../../assets/backoffice.css">
 </head>
 <body>
   <div class="container-fluid p-0 d-flex">
@@ -33,7 +33,7 @@
         <a href="#" class="nav-link d-flex align-items-center">
           <i class="fa-solid fa-clock-rotate-left me-2"></i> Historial
         </a>
-        <a href="../index.php" class="nav-link d-flex align-items-center">
+        <a href="../../index.php" class="nav-link d-flex align-items-center">
           <i class="fa-solid fa-right-from-bracket me-2"></i> Salir
         </a>
       </nav>

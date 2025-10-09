@@ -31,7 +31,7 @@ function mostrarMensaje($tipo) {
 </a>
 
 <button id="freno-button" class="btn-freno animate__animated animate__fadeInDown" title="Activar/Desactivar freno">
-  STOP
+  Stop!
 </button>
 
 

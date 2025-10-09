@@ -20,9 +20,9 @@ exit;
         $_SESSION['admin'] = $user["admin"];
 
         if ($user["admin"] == 1) {
-            header("Location: ../views/backoffice.php");
+            header("Location: ../views/backoffice/panel.php");
         } else {
-            header("Location: ../views/store.php");
+            header("Location: ../views/frontened/store.php");
         }
         exit;
     } else {
