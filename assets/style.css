@@ -131,8 +131,8 @@ body {
   height: 45px;
   border-radius: 8px;
   border: 1px solid #555;
-  background: #2a2a2a;
-  color: #e0e0e0;
+  background: #e6e2e2;
+  color: rgb(19, 18, 18);
   font-family: "Arial Black", sans-serif;
   font-size: 0.9rem;
   font-weight: bold;
@@ -150,7 +150,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Botón de Tecnologías */
 .btn-tecnologias {
   position: fixed;
   top: 22px;

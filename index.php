@@ -102,7 +102,7 @@ function mostrarMensaje($tipo) {
 
     freno.addEventListener("click", () => {
       frenado = !frenado;
-      freno.style.background = frenado ? "black" : "grey";
+      freno.style.background = frenado ? "grey" : "red";
     });
   });
 </script>

@@ -45,7 +45,7 @@ function actualizarContacto($pdo, $id, $nombre, $telefono, $email, $direccion) {
 function crearUsuario($usuario, $passwordHash, $admin = 0) {
     global $pdo;
 
-    // Verificar si existe el usuario
+    // existe?
     $stmt = $pdo->prepare("SELECT id FROM users WHERE name = ?");
     $stmt->execute([$usuario]);
 
@@ -53,7 +53,7 @@ function crearUsuario($usuario, $passwordHash, $admin = 0) {
         return false; // ya existe
     }
 
-    // Insertar usuario nuevo
+    // new user
     $stmt = $pdo->prepare("INSERT INTO users (name, password, admin) VALUES (?, ?, ?)");
     return $stmt->execute([$usuario, $passwordHash, $admin]);
 }

@@ -9,3 +9,7 @@
     <p>llega store</p>
 </body>
 </html>
+
+<?php // paginadores 
+// tabla de imagenes foreng key a la tabla de productos
+// ruta con una misma columna en productos 

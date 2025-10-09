@@ -2,7 +2,9 @@ e-commerce
 
 login (index)
 
-agregar usuario bd
+agregar usuario bd - intentar hashear contraseñas
+
+funcionalidad user inválido por == name 
 
 user - admin = 1 = back office
 
