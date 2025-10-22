@@ -42,18 +42,48 @@ function actualizarContacto($pdo, $id, $nombre, $telefono, $email, $direccion) {
 
 
 
-function crearUsuario($usuario, $passwordHash, $admin = 0) {
+function crearUsuario($usuario, $passwordHash, $admin = 0, $email = null) {
     global $pdo;
 
-    // existe?
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE name = ?");
-    $stmt->execute([$usuario]);
+    // Verificar si ya existe el usuario o el email
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE name = ? OR email = ?");
+    $stmt->execute([$usuario, $email]);
 
     if ($stmt->fetch()) {
-        return false; // ya existe
+        return false; // ya existe usuario o email
     }
 
-    // new user
-    $stmt = $pdo->prepare("INSERT INTO users (name, password, admin) VALUES (?, ?, ?)");
-    return $stmt->execute([$usuario, $passwordHash, $admin]);
+    
+    $stmt = $pdo->prepare("INSERT INTO users (name, password, admin, email) VALUES (?, ?, ?, ?)");
+    return $stmt->execute([$usuario, $passwordHash, $admin, $email]);
+}
+
+function existeEmail($email) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    return $stmt->fetch() ? true : false;
+}
+
+function guardarTokenRecuperacion($email, $token, $expires) {
+    global $pdo;
+    // Primero borramos tokens viejos de ese mail
+    $pdo->prepare("DELETE FROM password_resets WHERE email = ?")->execute([$email]);
+
+    // Insertamos el nuevo
+    $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
+    return $stmt->execute([$email, $token, $expires]);
+}
+
+function obtenerResetPorToken($token) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE token = ?");
+    $stmt->execute([$token]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function actualizarPasswordPorEmail($email, $newHash) {
+    global $pdo;
+    $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
+    return $stmt->execute([$newHash, $email]);
 }

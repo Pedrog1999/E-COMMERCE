@@ -22,9 +22,14 @@ function mostrarMensaje($tipo) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/global.css">
 
 </head>
 <body>
+
+<button id="theme-toggle" title="Cambiar tema">
+  <i id="theme-icon" class="fa-solid fa-moon"></i>
+</button>
 
 <a href="views/tecnologias.php" class="btn-tecnologias animate__animated animate__fadeInDown" title="Ver tecnologías utilizadas">
   <i class="fa fa-gear"></i>
@@ -68,7 +73,7 @@ function mostrarMensaje($tipo) {
       </form>
 
       <p class="text-center mt-3 text-muted">
-        Forgot your password? <a href="views/recoverit.php">Recover it</a><br>
+        Forgot your password? <a href="forgot.php">Recover it</a><br>
         Don’t have an account? <a href="views/register.php">Create one</a>
       </p>
     </div>
@@ -106,5 +111,6 @@ function mostrarMensaje($tipo) {
     });
   });
 </script>
+<script src="scripts/theme.js" defer></script>
 </body>
 </html>

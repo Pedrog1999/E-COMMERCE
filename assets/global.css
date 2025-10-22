@@ -1,0 +1,31 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #f5f5f5, #eaeaea);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --text-color: #121212;
+  --text-muted: #555;
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+  --input-focus: #888;
+  --button-bg: #333;
+  --button-hover: #555;
+  --link-color: #222;
+  --github-bg: #24292e;
+  --accent-color: #00bcd4;
+  --icon-color: #121212;
+}
+
+html.dark-mode {
+  --bg-gradient: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --text-color: #f5f5f5;
+  --text-muted: #aaa;
+  --input-bg: #2a2a2a;
+  --input-border: #444;
+  --input-focus: #888;
+  --button-bg: #444;
+  --button-hover: #666;
+  --link-color: #bbb;
+  --github-bg: #24292e;
+  --accent-color: #00bcd4;
+   --icon-color: #f5f5f5;
+}

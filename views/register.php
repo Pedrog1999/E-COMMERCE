@@ -39,6 +39,11 @@ function mostrarMensaje($tipo) {
                 </div>
 
                 <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" id="password" name="password" class="form-input" placeholder="********" required>
                 </div>
