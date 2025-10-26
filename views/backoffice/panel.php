@@ -2,7 +2,8 @@
 require_once '../../models/conexion.php';
 require_once '../../models/funciones.php';
 
-// $productos = getAllProducts($conn);
+// Obtener productos
+$productos = obtenerProductos($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,7 +16,7 @@ require_once '../../models/funciones.php';
 </head>
 <body>
   <div class="container-fluid p-0 d-flex">
-    
+
     <!-- SIDEBAR -->
     <aside class="sidebar d-flex flex-column">
       <div class="logo mb-4">Panel Admin</div>
@@ -32,16 +33,21 @@ require_once '../../models/funciones.php';
       </nav>
     </aside>
 
-    
-    <main class="main-content flex-grow-1 animate__animated animate__fadeIn">
+    <main class="main-content flex-grow-1 p-4">
       <div class="section active">
         <h1 class="mb-3">Gestión de Productos</h1>
 
-        <a href="addProduct.php" class="btn btn-dark">
+        <a href="addProduct.php" class="btn btn-dark mb-4">
           <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
         </a>
 
-        <table class="table table-dark table-striped mt-4">
+        <?php if (isset($_GET['success'])): ?>
+          <div class="alert alert-success">✅ Producto agregado correctamente.</div>
+        <?php elseif (isset($_GET['deleted'])): ?>
+          <div class="alert alert-warning">🗑️ Producto eliminado correctamente.</div>
+        <?php endif; ?>
+
+        <table class="table table-dark table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -49,29 +55,44 @@ require_once '../../models/funciones.php';
               <th>Descripción</th>
               <th>Precio</th>
               <th>Stock</th>
-              <th>País</th>
+              <th>Imagen</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($productos as $p): ?>
-            <tr>
-              <td><?= $p['id'] ?></td>
-              <td><?= htmlspecialchars($p['name']) ?></td>
-              <td><?= htmlspecialchars($p['description']) ?></td>
-              <td>$<?= number_format($p['price'], 2, ',', '.') ?></td>
-              <td><?= $p['stock'] ?></td>
-              <td><?= $p['country_name'] ?></td>
-              <td>
-                <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-secondary me-1">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </a>
-                <a href="../../controllers/productsController.php?delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
-                  <i class="fa-solid fa-trash"></i>
-                </a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (!empty($productos)): ?>
+              <?php foreach ($productos as $p): ?>
+              <tr>
+                <td><?= $p['id'] ?></td>
+                <td><?= htmlspecialchars($p['name']) ?></td>
+                <td><?= htmlspecialchars($p['description']) ?></td>
+                <td>$<?= number_format($p['price'], 2, ',', '.') ?></td>
+                <td><?= $p['stock'] ?></td>
+                <td>
+                  <?php
+                    $imagenes = obtenerImagenesProducto($pdo, $p['id']);
+                    if (!empty($imagenes)) {
+                        echo '<img src="../../' . htmlspecialchars($imagenes[0]) . '" width="80" height="80" style="object-fit:cover;border-radius:6px;">';
+                    } else {
+                        echo '<span class="text-muted">Sin imagen</span>';
+                    }
+                  ?>
+                </td>
+                 <td>
+                  <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-secondary me-1">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                  <a href="../../controllers/productsController.php?delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="6" class="text-center text-muted">No hay productos cargados.</td>
+              </tr>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
