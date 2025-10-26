@@ -16,7 +16,8 @@ require_once '../../models/conexion.php';
       <div class="alert alert-danger">❌ Ocurrió un error al agregar el producto.</div>
     <?php endif; ?>
 
-    <form action="../../controllers/productsController.php" method="POST" class="bg-secondary p-4 rounded">
+    <form action="../../controllers/productsController.php" method="POST" enctype="multipart/form-data" class="bg-secondary p-4 rounded">
+
       <div class="mb-3">
         <label class="form-label">Nombre</label>
         <input type="text" name="name" class="form-control" required>

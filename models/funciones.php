@@ -96,13 +96,16 @@ function agregarProducto($pdo, $name, $description, $price, $stock, $id_countrie
     $sql = "INSERT INTO products (name, description, price, stock, id_countries) 
             VALUES (:name, :description, :price, :stock, :id_countries)";
     $stmt = $pdo->prepare($sql);
-    return $stmt->execute([
+    if ($stmt->execute([
         ":name" => $name,
         ":description" => $description,
         ":price" => $price,
         ":stock" => $stock,
         ":id_countries" => $id_countries
-    ]);
+    ])) {
+        return $pdo->lastInsertId(); // <--- DEVUELVE EL ID DEL NUEVO PRODUCTO
+    }
+    return false;
 }
 
 function eliminarProducto($pdo, $id) {

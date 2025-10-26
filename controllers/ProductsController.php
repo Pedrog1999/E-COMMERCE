@@ -1,6 +1,7 @@
 <?php
 require_once '../models/conexion.php';
 require_once '../models/funciones.php';
+$uploadDir = __DIR__ . "/../assets/uploads/products/$productId/";
 
 // === AGREGAR PRODUCTO === //
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
