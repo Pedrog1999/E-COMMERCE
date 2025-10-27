@@ -1,47 +1,6 @@
 <?php
 require_once __DIR__ . "/conexion.php";
 
-
-function obtenerContactos($pdo) {
-    $stmt = $pdo->query("SELECT * FROM agenda ORDER BY id DESC");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-function agregarContacto($pdo, $nombre, $telefono, $email, $direccion) {
-    $sql = "INSERT INTO agenda (nombre, telefono, email, direccion) 
-            VALUES (:nombre, :telefono, :email, :direccion)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ":nombre" => $nombre,
-        ":telefono" => $telefono,
-        ":email" => $email,
-        ":direccion" => $direccion
-    ]);
-}
-
-
-function eliminarContacto($pdo, $id) {
-    $stmt = $pdo->prepare("DELETE FROM agenda WHERE id = ?");
-    $stmt->execute([$id]);
-}
-
-
-function obtenerContactoPorId($pdo, $id) {
-    $stmt = $pdo->prepare("SELECT * FROM agenda WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-
-function actualizarContacto($pdo, $id, $nombre, $telefono, $email, $direccion) {
-    $stmt = $pdo->prepare("UPDATE agenda SET nombre=?, telefono=?, email=?, direccion=? WHERE id=?");
-    $stmt->execute([$nombre, $telefono, $email, $direccion, $id]);
-}
-
-
-
-
 function crearUsuario($usuario, $passwordHash, $admin = 0, $email = null) {
     global $pdo;
 
@@ -144,4 +103,17 @@ function obtenerImagenesProducto($pdo, $productId) {
     $stmt = $pdo->prepare("SELECT image_path FROM product_images WHERE product_id = ?");
     $stmt->execute([$productId]);
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+function obtenerProductosPaginados($pdo, $limite, $offset) {
+    $sql = "SELECT * FROM products ORDER BY id DESC LIMIT :limite OFFSET :offset";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':limite', (int)$limite, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function contarProductos($pdo) {
+    $stmt = $pdo->query("SELECT COUNT(*) FROM products");
+    return $stmt->fetchColumn();
 }

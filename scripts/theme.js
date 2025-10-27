@@ -1,47 +1,66 @@
+// scripts/theme.js
 document.addEventListener("DOMContentLoaded", () => {
   const html = document.documentElement;
   const toggle = document.getElementById("theme-toggle");
   const icon = document.getElementById("theme-icon");
 
-  // Cargar tema guardado
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    html.classList.add("dark-mode");
-    icon.classList.replace("fa-moon", "fa-sun");
+  // Seguridad: si no existe el toggle (ej: en otras páginas) no ejecutamos el listener
+  // (esto permite incluir el script con defer sin romper nada)
+  if (!toggle) {
+    // Si no hay toggle, igualmente aplicamos el theme guardado (por si index incluye el script)
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      html.classList.add('light-mode');
+      html.classList.remove('dark-mode');
+    } else if (saved === 'dark') {
+      html.classList.add('dark-mode');
+      html.classList.remove('light-mode');
+    }
+    return;
   }
 
-  toggle.addEventListener("click", () => {
-    // Agrega efecto visual suave
-    html.classList.add("theme-transition");
+  // Inicializar icon + clases según lo guardado (si no hay guardado, por defecto 'dark')
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    html.classList.add('light-mode');
+    html.classList.remove('dark-mode');
+    if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+  } else {
+    html.classList.add('dark-mode');
+    html.classList.remove('light-mode');
+    if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+  }
 
-    // Rotación del ícono tipo "spin solar"
-    icon.style.transition = "transform 0.6s ease";
-    icon.style.transform = "rotate(360deg)";
+  // Toggle only on index (toggle exists)
+  toggle.addEventListener('click', () => {
+    // efecto
+    html.classList.add('theme-transition');
+    if (icon) {
+      icon.style.transition = "transform 0.6s ease";
+      icon.style.transform = "rotate(360deg)";
+    }
 
     setTimeout(() => {
-      const darkModeOn = html.classList.toggle("dark-mode");
+      const nowIsLight = html.classList.contains('light-mode');
+      const newMode = nowIsLight ? 'dark' : 'light';
 
-      if (darkModeOn) {
-        icon.classList.replace("fa-moon", "fa-sun");
-        localStorage.setItem("theme", "dark");
+      if (newMode === 'light') {
+        html.classList.add('light-mode');
+        html.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
       } else {
-        icon.classList.replace("fa-sun", "fa-moon");
-        localStorage.setItem("theme", "light");
+        html.classList.add('dark-mode');
+        html.classList.remove('light-mode');
+        localStorage.setItem('theme', 'dark');
+        if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
       }
 
-      // Quita el blur/fade y reinicia la rotación
+      // limpiar transiciones
       setTimeout(() => {
-        html.classList.remove("theme-transition");
-        icon.style.transform = "rotate(0deg)";
-      }, 400);
-
+        html.classList.remove('theme-transition');
+        if (icon) icon.style.transform = "rotate(0deg)";
+      }, 420);
     }, 150);
   });
 });
-const body = document.body;
-
-document.querySelector('.theme-toggle').addEventListener('click', () => {
-  body.classList.add('transitioning');
-  setTimeout(() => body.classList.remove('transitioning'), 800);
-});
-

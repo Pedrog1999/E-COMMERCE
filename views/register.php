@@ -16,6 +16,12 @@ function mostrarMensaje($tipo) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
+    <!-- colocar AL PRINCIPIO del <head>, antes de los link rel stylesheet -->
+<!-- en el head de TODAS las páginas -->
+<script>
+  document.documentElement.classList.add(localStorage.getItem('theme') || 'dark-mode');
+</script>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/register.css">
@@ -56,5 +62,7 @@ function mostrarMensaje($tipo) {
             </p>
         </div>
     </div>
+    <script src="../scripts/theme.js"></script>
+
 </body>
 </html>

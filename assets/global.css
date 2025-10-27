@@ -29,3 +29,61 @@ html.dark-mode {
   --accent-color: #00bcd4;
    --icon-color: #f5f5f5;
 }
+/* ---------- THEME VARIABLES UNIFICADAS ---------- */
+/* Aplica variables si el documento tiene html.light-mode o html.dark-mode */
+
+html.light-mode {
+  --bg-gradient: radial-gradient(circle at top, #ffffff, #d9d9d9);
+  --text-color: #1a1a1a;
+  --text-muted: #555;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --input-bg: #f3f3f3;
+  --input-border: #ccc;
+  --input-focus: #00bcd4;
+  --button-bg: #00bcd4;
+  --button-hover: #00a5ba;
+  --link-color: #00bcd4;
+  --accent-color: #00bcd4;
+  --github-bg: #555;
+  --btn-tec-bg: linear-gradient(145deg, #fdfdfd, #e5e5e5);
+  --btn-tec-color: #1a1a1a;
+  --icon-color: #1a1a1a;
+}
+
+html.dark-mode {
+  --bg-gradient: radial-gradient(circle at top, #1a1a1a, #0f0f0f);
+  --text-color: #eaeaea;
+  --text-muted: #b3b3b3;
+  --card-bg: rgba(20, 20, 20, 0.9);
+  --input-bg: #181818;
+  --input-border: #333;
+  --input-focus: #00bcd4;
+  --button-bg: #00bcd4;
+  --button-hover: #00a5ba;
+  --link-color: #00bcd4;
+  --accent-color: #00bcd4;
+  --github-bg: #333;
+  --btn-tec-bg: linear-gradient(145deg, #1a1a1a, #101010);
+  --btn-tec-color: #eaeaea;
+  --icon-color: #f5f5f5;
+}
+
+/* fallback: si por alguna razón no hay clase, forzamos dark como default */
+:root {
+  /* defaults (dark-like) */
+  --bg-gradient: radial-gradient(circle at top, #1a1a1a, #0f0f0f);
+  --text-color: #eaeaea;
+  --text-muted: #b3b3b3;
+  --card-bg: rgba(20, 20, 20, 0.9);
+  --input-bg: #181818;
+  --input-border: #333;
+  --input-focus: #00bcd4;
+  --button-bg: #00bcd4;
+  --button-hover: #00a5ba;
+  --link-color: #00bcd4;
+  --accent-color: #00bcd4;
+  --github-bg: #333;
+  --btn-tec-bg: linear-gradient(145deg, #1a1a1a, #101010);
+  --btn-tec-color: #eaeaea;
+  --icon-color: #f5f5f5;
+}
