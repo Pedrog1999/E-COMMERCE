@@ -2,7 +2,7 @@
 require_once '../../models/conexion.php';
 require_once '../../models/funciones.php';
 
-// Obtener productos
+// aca obtengo productos
 $productos = obtenerProductos($pdo);
 ?>
 <!DOCTYPE html>
@@ -22,13 +22,13 @@ $productos = obtenerProductos($pdo);
       <div class="logo mb-4">Panel Admin</div>
       <nav class="menu nav flex-column gap-2">
         <a href="panel.php" class="nav-link active d-flex align-items-center">
-          <i class="fa-solid fa-box me-2"></i> Productos
+          <i class="fa-solid fa-box me-2"></i> Products
         </a>
         <a href="#" class="nav-link d-flex align-items-center">
-          <i class="fa-solid fa-clock-rotate-left me-2"></i> Historial
+          <i class="fa-solid fa-clock-rotate-left me-2"></i> Sales history
         </a>
         <a href="../../index.php" class="nav-link d-flex align-items-center">
-          <i class="fa-solid fa-right-from-bracket me-2"></i> Salir
+          <i class="fa-solid fa-right-from-bracket me-2"></i> Exit
         </a>
       </nav>
     </aside>
@@ -42,21 +42,21 @@ $productos = obtenerProductos($pdo);
         </a>
 
         <?php if (isset($_GET['success'])): ?>
-          <div class="alert alert-success">✅ Producto agregado correctamente.</div>
+          <div class="alert alert-success">The product was added successfully.</div>
         <?php elseif (isset($_GET['deleted'])): ?>
-          <div class="alert alert-warning">🗑️ Producto eliminado correctamente.</div>
+          <div class="alert alert-warning">The product was deleted successfully.</div>
         <?php endif; ?>
 
         <table class="table table-dark table-striped">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Precio</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
               <th>Stock</th>
-              <th>Imagen</th>
-              <th>Acciones</th>
+              <th>Images</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -80,10 +80,10 @@ $productos = obtenerProductos($pdo);
                 </td>
                  <td>
                   <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-secondary me-1">
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-pen-to-square">UPDATE</i>
                   </a>
                   <a href="../../controllers/productsController.php?delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
-                    <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-trash">DELETE</i>
                   </a>
                 </td>
               </tr>
