@@ -6,7 +6,7 @@ $basePath = dirname(__DIR__, 2); // sube dos niveles desde frontend/
 $baseUrl = str_replace($_SERVER['DOCUMENT_ROOT'], '', $basePath);
 
 //paginación
-$porPagina = 8; // demo 5 por p
+$porPagina = 8; // 8 por pagina, a corregir
 $pagina = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 $totalProductos = contarProductos($pdo);
 $totalPaginas = ceil($totalProductos / $porPagina);

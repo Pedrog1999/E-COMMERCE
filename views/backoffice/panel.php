@@ -35,7 +35,7 @@ $productos = obtenerProductos($pdo);
 
     <main class="main-content flex-grow-1 p-4">
       <div class="section active">
-        <h1 class="mb-3">Gestión de Productos</h1>
+        <h1 class="mb-3">Product management</h1>
 
         <a href="addProduct.php" class="btn btn-dark mb-4">
           <i class="fa-solid fa-plus me-1"></i> Add product
