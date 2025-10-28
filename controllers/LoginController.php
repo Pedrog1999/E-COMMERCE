@@ -22,7 +22,7 @@ exit;
         if ($user["admin"] == 1) {
             header("Location: ../views/backoffice/panel.php");
         } else {
-            header("Location: ../views/frontened/store.php");
+            header("Location: ../views/frontend/store.php");
         }
         exit;
     } else {

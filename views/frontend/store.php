@@ -6,7 +6,7 @@ $basePath = dirname(__DIR__, 2); // sube dos niveles desde frontend/
 $baseUrl = str_replace($_SERVER['DOCUMENT_ROOT'], '', $basePath);
 
 //paginación
-$porPagina = 6; // demo 5 por p
+$porPagina = 8; // demo 5 por p
 $pagina = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
 $totalProductos = contarProductos($pdo);
 $totalPaginas = ceil($totalProductos / $porPagina);
@@ -97,8 +97,6 @@ $productos = obtenerProductosPaginados($pdo, $porPagina, $offset);
           </div>
         <?php endforeach; ?>
       </div>
-
-      <!-- Paginador -->
       <nav class="mt-5">
         <ul class="pagination justify-content-center">
           <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>

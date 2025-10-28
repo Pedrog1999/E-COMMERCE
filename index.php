@@ -30,7 +30,7 @@ function mostrarMensaje($tipo) {
   <i id="theme-icon" class="fa-solid fa-moon"></i>
 </button>
 
-<a href="views/tecnologias.php" class="btn-tecnologias animate__animated animate__fadeInDown" title="Ver tecnologías utilizadas">
+<a href="views/frontend/tecnologias.php" class="btn-tecnologias animate__animated animate__fadeInDown" title="Ver tecnologías utilizadas">
   <i class="fa fa-gear"></i>
 </a>
 
@@ -73,7 +73,7 @@ function mostrarMensaje($tipo) {
 
       <p class="text-center mt-3 text-muted">
         Forgot your password? <a href="forgot.php">Recover it</a><br>
-        Don’t have an account? <a href="views/register.php">Create one</a>
+        Don’t have an account? <a href="views/frontend/register.php">Create one</a>
       </p>
     </div>
 

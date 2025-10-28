@@ -1,4 +1,4 @@
-// scripts/theme.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const html = document.documentElement;
   const toggle = document.getElementById("theme-toggle");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Seguridad: si no existe el toggle (ej: en otras páginas) no ejecutamos el listener
   // (esto permite incluir el script con defer sin romper nada)
   if (!toggle) {
-    // Si no hay toggle, igualmente aplicamos el theme guardado (por si index incluye el script)
+    // Si no hay toggle, igualmente aplicamos el theme guardado
     const saved = localStorage.getItem('theme');
     if (saved === 'light') {
       html.classList.add('light-mode');
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
   }
 
-  // Toggle only on index (toggle exists)
   toggle.addEventListener('click', () => {
     // efecto
     html.classList.add('theme-transition');

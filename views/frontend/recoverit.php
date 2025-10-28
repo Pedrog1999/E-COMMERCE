@@ -8,7 +8,7 @@
 <title>Reveal Password Hash (DEV)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<link rel="stylesheet" href="../assets/register.css">
+<link rel="stylesheet" href="../../assets/recover.css">
 </head>
 <body>
   <div class="auth-container">
@@ -27,7 +27,7 @@
       }
       ?>
 
-      <form method="POST" action="../controllers/RecoverController.php">
+      <form method="POST" action="../../controllers/RecoverController.php">
         <div class="form-group">
           <label class="form-label" for="usuario">Username</label>
           <input id="usuario" name="usuario" class="form-input" required>

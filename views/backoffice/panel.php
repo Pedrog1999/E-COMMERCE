@@ -38,7 +38,7 @@ $productos = obtenerProductos($pdo);
         <h1 class="mb-3">Gestión de Productos</h1>
 
         <a href="addProduct.php" class="btn btn-dark mb-4">
-          <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
+          <i class="fa-solid fa-plus me-1"></i> Add product
         </a>
 
         <?php if (isset($_GET['success'])): ?>

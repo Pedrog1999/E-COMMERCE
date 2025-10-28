@@ -22,4 +22,15 @@ https://build.layoutit.com/
 
 payment de steam
 
+historial de compras 
+
+id countries 
+
+countries frontend store 
+
+resolver tema de light/dark mode 
+
+css en variables
+
+
 

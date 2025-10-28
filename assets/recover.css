@@ -1,0 +1,231 @@
+/* assets/register.css
+   Estilo moderno para recoverit.php
+   - Glassmorphism card
+   - Fondo dinámico con partículas sutiles (CSS)
+   - Inputs con focus marcado
+   - Botón con micro-animación
+   - Soporta dark/light facilmente via variables
+*/
+
+/* --- Fuentes --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+:root{
+  --bg-1: #0f1724;            /* oscuro principal */
+  --bg-2: #0b1220;            /* secundario */
+  --accent-1: #7c5cff;        /* morado */
+  --accent-2: #3be3b3;        /* verde aqua */
+  --glass: rgba(255,255,255,0.06);
+  --glass-strong: rgba(255,255,255,0.09);
+  --text: #e6eef8;
+  --muted: #98a0b3;
+  --danger: #ff6b6b;
+  --success: #2dd4bf;
+  --radius-lg: 18px;
+  --radius-sm: 10px;
+  --shadow-1: 0 6px 30px rgba(2,6,23,0.6);
+  --shadow-2: 0 10px 40px rgba(11,12,30,0.5);
+}
+
+/* --- Reset / base --- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100%;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent 8%),
+              radial-gradient(1000px 500px at 90% 90%, rgba(59,227,179,0.08), transparent 10%),
+              linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+/* subtle animated background "noise" using pseudo element */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity:0.35;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+  transform: translateZ(0);
+  filter: blur(6px) saturate(120%);
+}
+
+/* --- Container --- */
+.auth-container{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:32px;
+}
+
+/* Card */
+.auth-card{
+  width:100%;
+  max-width:520px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s cubic-bezier(.2,.9,.2,1);
+}
+
+/* top accent sliver */
+.auth-card::after{
+  content:"";
+  position:absolute;
+  left:-30%;
+  top:-40%;
+  width:160%;
+  height:220px;
+  background: linear-gradient(90deg, rgba(124,92,255,0.14), rgba(59,227,179,0.08));
+  transform: rotate(-8deg);
+  filter: blur(30px);
+  pointer-events:none;
+}
+
+/* Hover lift */
+.auth-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-2);
+}
+
+/* Title / subtitle */
+.auth-title{
+  margin:0 0 6px 0;
+  font-size:1.9rem;
+  letter-spacing:-0.02em;
+  font-weight:700;
+  color:var(--text);
+}
+.auth-subtitle{
+  margin:0 0 18px 0;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+/* Alerts override to fit theme */
+.alert{
+  border-radius: 10px;
+  padding:10px 12px;
+  font-size:0.95rem;
+  margin-bottom:14px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.alert-danger{ background: rgba(255,107,107,0.08); color:var(--danger); border-color: rgba(255,107,107,0.12) }
+.alert-success{ background: rgba(45,212,191,0.06); color:var(--success); border-color: rgba(45,212,191,0.10) }
+
+/* Form */
+form{ display:flex; flex-direction:column; gap:14px; }
+
+/* Input group */
+.form-group{ display:flex; flex-direction:column; gap:8px; }
+.form-label{ font-size:0.9rem; color:var(--muted); font-weight:600; }
+.form-input{
+  appearance:none;
+  -webkit-appearance:none;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  color:var(--text);
+  padding:12px 14px;
+  border-radius: var(--radius-sm);
+  font-size:1rem;
+  outline: none;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .06s ease;
+  box-shadow: 0 2px 10px rgba(2,6,23,0.35) inset;
+}
+
+/* Placeholder color */
+.form-input::placeholder{ color: rgba(230,238,248,0.35); }
+
+/* Focus */
+.form-input:focus{
+  border-color: rgba(124,92,255,0.9);
+  box-shadow: 0 6px 30px rgba(124,92,255,0.06);
+  transform: translateY(-1px);
+}
+
+/* Submit */
+.btn-auth{
+  display:inline-block;
+  width:100%;
+  padding:12px 16px;
+  border-radius: 12px;
+  font-weight:700;
+  letter-spacing:0.02em;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color:#051018;
+  box-shadow: 0 8px 30px rgba(59,227,179,0.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  text-transform:uppercase;
+}
+
+/* pulse animation tweak (animate.css already loaded) */
+.btn-auth.animate__animated.animate__pulse{
+  --animate-duration: 2.2s;
+}
+
+/* hover / active */
+.btn-auth:hover{ transform: translateY(-3px) scale(1.01); filter:brightness(1.02) }
+.btn-auth:active{ transform: translateY(0); filter:brightness(.98) }
+.btn-auth:focus{ outline: 3px solid rgba(124,92,255,0.14); outline-offset:2px; }
+
+/* Footer link */
+.auth-footer{
+  margin-top:8px;
+  font-size:0.9rem;
+  color:var(--muted);
+  text-align:center;
+}
+.auth-footer a{
+  color:var(--text);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  opacity:0.95;
+}
+
+/* Small helper */
+.small-muted{ font-size:0.86rem; color:var(--muted) }
+
+/* Responsive */
+@media (max-width:720px){
+  .auth-card{ padding:20px; border-radius:14px; width:100%; max-width:420px }
+  .auth-title{ font-size:1.5rem }
+}
+
+/* Extra: floating decorative dots (pure CSS) */
+.auth-card .dots{
+  position:absolute;
+  right: -30px;
+  bottom: -30px;
+  width:220px;
+  height:220px;
+  background: radial-gradient(circle at 30% 30%, rgba(124,92,255,0.12), transparent 10%),
+              radial-gradient(circle at 70% 70%, rgba(59,227,179,0.08), transparent 12%);
+  border-radius:50%;
+  filter: blur(10px);
+  pointer-events:none;
+  opacity:0.85;
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .auth-card, .btn-auth, .form-input { transition: none !important; animation: none !important; }
+}

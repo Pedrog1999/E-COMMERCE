@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="../assets/tecnologias.css">
+    <link rel="stylesheet" href="../../assets/tecnologias.css">
 
 </head>
 <body>
     <div class="tech-card animate__animated animate__fadeInDown">
-        <h1><i class="fa fa-cogs"></i> Tecnologías Utilizadas</h1>
+        <h1><i class="fa fa-cogs"></i> Technologies used</h1>
         <ul class="tech-list">
             <li>
                 <a href="https://www.php.net/" target="_blank" rel="noopener">
@@ -56,7 +56,7 @@
             </li>
         </ul>
         <a href="../index.php" class="btn btn-back">
-            <i class="fa fa-arrow-left"></i> Volver al Login
+            <i class="fa fa-arrow-left"></i> Back to Login
         </a>
     </div>
 </body>

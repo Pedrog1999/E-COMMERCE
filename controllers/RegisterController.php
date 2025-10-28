@@ -20,10 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Hasheamos la contraseña
+    // agregar y testear password_verify
+
+
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     
-    $result = crearUsuario($usuario, $hash, 0, $email); // admin = 0
+    $result = crearUsuario($usuario, $hash, 0, $email); // admin = 0 por defecto
 
     if ($result) {
         $_SESSION['success'] = "Account created successfully! You can log in now.";
@@ -31,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     } else {
         $_SESSION['error'] = "Username or email already exists.";
-        header("Location: ../views/register.php");
+        header("Location: ../views/frontend/register.php");
         exit;
     }
 }

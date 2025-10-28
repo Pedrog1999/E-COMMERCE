@@ -3,19 +3,19 @@ require_once '../models/conexion.php';
 require_once '../models/funciones.php';
 $uploadDir = __DIR__ . "/../assets/uploads/products/$productId/";
 
-// === AGREGAR PRODUCTO === //
+// agrego producto
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
     $price = floatval($_POST['price']);
     $stock = intval($_POST['stock']);
-    $id_countries = null; // lo dejamos null por ahora
+    $id_countries = null; // lo dejamos null por ahora, a agregar
 
     try {
-        // 1️⃣ Insertamos el producto y obtenemos su ID
+        //  Insertamos el producto y obtenemos su ID
         $productId = agregarProducto($pdo, $name, $description, $price, $stock, $id_countries);
 
-        // 2️⃣ Si se subieron imágenes, procesarlas
+        //  Si se subieron imágenes, procesarlas
         if (!empty($_FILES['images']['name'][0])) {
             $uploadDir = "../assets/uploads/products/$productId/";
             if (!is_dir($uploadDir)) {
