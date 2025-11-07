@@ -1,117 +1,48 @@
 <?php
 require_once '../../models/conexion.php';
-require_once '../../models/funciones.php';
-// Detecta automáticamente el path base del proyecto
-$basePath = dirname(__DIR__, 2); // sube dos niveles desde frontend/
-$baseUrl = str_replace($_SERVER['DOCUMENT_ROOT'], '', $basePath);
 
-//paginación
-$porPagina = 8; // 8 por pagina, a corregir
-$pagina = isset($_GET['pagina']) ? max(1, intval($_GET['pagina'])) : 1;
-$totalProductos = contarProductos($pdo);
-$totalPaginas = ceil($totalProductos / $porPagina);
-$offset = ($pagina - 1) * $porPagina;
 
-// Obtener productos con límite
-$productos = obtenerProductosPaginados($pdo, $porPagina, $offset);
+$stmt = $pdo->query("SELECT id, name, image_url FROM countries ORDER BY id ASC");
+$countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$descriptions = [
+  'japan' => 'エンジニアリングとエンジンにおける革新と精度。',
+  'united-states' => 'A global leader in technology and development.',
+  'china' => '產品種類豐富，生產規模龐大。',
+  'argentina' => 'Calidad y tradición en agronomía y alimentos, no seas boludo.'
+];
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tienda</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f8f9fa;
-      font-family: 'Poppins', sans-serif;
-    }
-    .product-card {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    }
-    .product-img {
-      height: 220px;
-      width: 100%;
-      object-fit: cover;
-    }
-    .product-info {
-      padding: 1rem;
-    }
-    .product-name {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .product-price {
-      font-size: 1.1rem;
-      color: #28a745;
-      font-weight: 600;
-    }
-    .pagination .page-link {
-      color: #000;
-      border: none;
-    }
-    .pagination .active .page-link {
-      background-color: #000;
-      color: #fff;
-    }
-  </style>
+  <title>Choose your country</title>
+  <link href="../../assets/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/store.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-dark text-light d-flex flex-column justify-content-center align-items-center min-vh-100">
 
-  <div class="container py-5">
-    <h1 class="text-center mb-4">All-Products</h1>
+  <div class="text-center mb-5">
+    <h1 class="fw-bold display-5 text-gradient">Choose the country from which you would like to import</h1>
+    <p class="text-muted">Explore unique products from every corner of the world</p>
+  </div>
 
-    <?php if (empty($productos)): ?>
-      <div class="text-center text-muted fs-5">No hay productos disponibles.</div>
-    <?php else: ?>
-      <div class="row g-4">
-        <?php foreach ($productos as $p): ?>
-          <?php
-            $imagenes = obtenerImagenesProducto($pdo, $p['id']);
-           $img = !empty($imagenes)
-  ? '../../' . htmlspecialchars($imagenes[0])
-  : 'https://via.placeholder.com/300x220?text=Sin+imagen';
-
-
-
-          ?>
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="product-card h-100">
-              <img src="<?= $img ?>" alt="<?= htmlspecialchars($p['name']) ?>" class="product-img">
-              <div class="product-info">
-                <div class="product-name mb-2"><?= htmlspecialchars($p['name']) ?></div>
-                <div class="text-muted mb-2"><?= htmlspecialchars($p['description']) ?></div>
-                <div class="product-price mb-3">$<?= number_format($p['price'], 2, ',', '.') ?></div>
-                <button class="btn btn-dark w-100">Agregar al carrito</button>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <nav class="mt-5">
-        <ul class="pagination justify-content-center">
-          <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-            <li class="page-item <?= ($i == $pagina) ? 'active' : '' ?>">
-              <a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a>
-            </li>
-          <?php endfor; ?>
-        </ul>
-      </nav>
-    <?php endif; ?>
+  <div class="country-grid">
+    <?php foreach ($countries as $country):
+          $img = htmlspecialchars($country['image_url']);
+          $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $country['name']), '-'));
+          $desc = $descriptions[$slug] ?? 'Explorá nuestros productos destacados.';
+    ?>
+      <a href="/ecom/views/frontend/countries/<?= $slug ?>.php" class="country-card" title="<?= htmlspecialchars($country['name']) ?>">
+        <div class="flag-wrapper">
+          <img src="../../<?= $img ?>" alt="<?= htmlspecialchars($country['name']) ?>" class="country-img">
+        </div>
+        <span class="country-name"><?= htmlspecialchars($country['name']) ?></span>
+        <p class="country-desc"><?= htmlspecialchars($desc) ?></p>
+      </a>
+    <?php endforeach; ?>
   </div>
 
 </body>
 </html>
-
-<?php // paginadores 
-// tabla de imagenes foreng key a la tabla de productos
-// ruta con una misma columna en productos 

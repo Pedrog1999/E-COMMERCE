@@ -49,51 +49,54 @@ $productos = obtenerProductos($pdo);
 
         <table class="table table-dark table-striped">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Images</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php if (!empty($productos)): ?>
-              <?php foreach ($productos as $p): ?>
-              <tr>
-                <td><?= $p['id'] ?></td>
-                <td><?= htmlspecialchars($p['name']) ?></td>
-                <td><?= htmlspecialchars($p['description']) ?></td>
-                <td>$<?= number_format($p['price'], 2, ',', '.') ?></td>
-                <td><?= $p['stock'] ?></td>
-                <td>
-                  <?php
-                    $imagenes = obtenerImagenesProducto($pdo, $p['id']);
-                    if (!empty($imagenes)) {
-                        echo '<img src="../../' . htmlspecialchars($imagenes[0]) . '" width="80" height="80" style="object-fit:cover;border-radius:6px;">';
-                    } else {
-                        echo '<span class="text-muted">Sin imagen</span>';
-                    }
-                  ?>
-                </td>
-                 <td>
-                  <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-secondary me-1">
-                    <i class="fa-solid fa-pen-to-square">UPDATE</i>
-                  </a>
-                  <a href="../../controllers/productsController.php?delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
-                    <i class="fa-solid fa-trash">DELETE</i>
-                  </a>
-                </td>
-              </tr>
-              <?php endforeach; ?>
-            <?php else: ?>
-              <tr>
-                <td colspan="6" class="text-center text-muted">No hay productos cargados.</td>
-              </tr>
-            <?php endif; ?>
-          </tbody>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Country</th> <!-- ✅ nueva columna -->
+    <th>Images</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  <?php if (!empty($productos)): ?>
+    <?php foreach ($productos as $p): ?>
+    <tr>
+      <td><?= $p['id'] ?></td>
+      <td><?= htmlspecialchars($p['name']) ?></td>
+      <td><?= htmlspecialchars($p['description']) ?></td>
+      <td>$<?= number_format($p['price'], 2, ',', '.') ?></td>
+      <td><?= $p['stock'] ?></td>
+      <td><?= htmlspecialchars($p['country_name'] ?? '—') ?></td> <!-- ✅ muestra país o guion -->
+      <td>
+        <?php
+          $imagenes = obtenerImagenesProducto($pdo, $p['id']);
+          if (!empty($imagenes)) {
+              echo '<img src="../../' . htmlspecialchars($imagenes[0]) . '" width="80" height="80" style="object-fit:cover;border-radius:6px;">';
+          } else {
+              echo '<span class="text-muted">Sin imagen</span>';
+          }
+        ?>
+      </td>
+      <td>
+        <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-secondary me-1">
+          <i class="fa-solid fa-pen-to-square">UPDATE</i>
+        </a>
+        <a href="../../controllers/productsController.php?delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
+          <i class="fa-solid fa-trash">DELETE</i>
+        </a>
+      </td>
+    </tr>
+    <?php endforeach; ?>
+  <?php else: ?>
+    <tr>
+      <td colspan="8" class="text-center text-muted">No hay productos cargados.</td>
+    </tr>
+  <?php endif; ?>
+</tbody>
+
         </table>
       </div>
     </main>

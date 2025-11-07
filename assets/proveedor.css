@@ -1,0 +1,80 @@
+/* --- ESTILO PREMIUM OSCURO PARA PERFIL DE PROVEEDOR --- */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(145deg, #181818, #121212);
+  color: #eaeaea;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.proveedor-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 60px auto;
+}
+
+.proveedor-card {
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.proveedor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+}
+
+.proveedor-img-wrapper {
+  flex: 1 1 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.proveedor-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #333;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+  transition: 0.3s ease;
+}
+
+.proveedor-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
+}
+
+.proveedor-info {
+  flex: 2 1 400px;
+}
+
+.proveedor-nombre {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.proveedor-ubicacion,
+.proveedor-telefono {
+  font-size: 1rem;
+  color: #b5b5b5;
+  margin-bottom: 8px;
+}
+
+.proveedor-descripcion {
+  margin-top: 20px;
+  font-size: 1.05r
+}

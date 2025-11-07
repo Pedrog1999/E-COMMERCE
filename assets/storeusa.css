@@ -1,0 +1,171 @@
+/* ---------- BASE ---------- */
+body {
+  background: linear-gradient(180deg, #101010, #1b1b1b);
+  color: #eaeaea;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+/* ---------- HEADER ---------- */
+h1 {
+  background: linear-gradient(90deg, #e24b4b, #ff8b8b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+p {
+  color: #aaa;
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ---------- GRID ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* ---------- CARD ---------- */
+.product-card {
+  background: #242424;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  text-align: center;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  background: #2a2a2a;
+  box-shadow: 0 0 25px rgba(255,100,100,0.3);
+}
+
+/* ---------- IMAGEN ---------- */
+.product-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* mantiene cuadrado y proporcional */
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 2px solid #3a3a3a;
+  background: #1b1b1b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* muestra toda la imagen sin recortarla */
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: brightness(0.95);
+  background: #151515; /* fondo oscuro por si hay transparencia */
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Para imágenes pequeñas o con fondo blanco */
+.product-img-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+}
+
+/* ---------- INFO ---------- */
+.product-info {
+  text-align: center;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.product-price {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ff8b8b;
+}
+
+/* ---------- PAGINADOR ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  gap: 10px;
+}
+
+.page-link {
+  background: #2c2c2c;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.page-link:hover {
+  background: #ff8b8b;
+  color: #101010;
+}
+
+.page-link.active {
+  background: #ff8b8b;
+  color: #101010;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .product-img-wrapper {
+    height: 140px;
+  }
+}

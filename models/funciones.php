@@ -46,21 +46,28 @@ function actualizarPasswordPorEmail($email, $newHash) {
     $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
     return $stmt->execute([$newHash, $email]);
 }
+
 function obtenerProductos($pdo) {
-    $stmt = $pdo->query("SELECT id, name, description, price, stock, id_countries FROM products ORDER BY id DESC");
+    $stmt = $pdo->query("
+        SELECT p.id, p.name, p.description, p.price, p.stock, 
+               c.name AS country_name
+        FROM products p
+        LEFT JOIN countries c ON p.country_id = c.id
+        ORDER BY p.id DESC
+    ");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function agregarProducto($pdo, $name, $description, $price, $stock, $id_countries = null) {
-    $sql = "INSERT INTO products (name, description, price, stock, id_countries) 
-            VALUES (:name, :description, :price, :stock, :id_countries)";
+function agregarProducto($pdo, $name, $description, $price, $stock, $country_id = null) {
+    $sql = "INSERT INTO products (name, description, price, stock, country_id) 
+            VALUES (:name, :description, :price, :stock, :country_id)";
     $stmt = $pdo->prepare($sql);
     if ($stmt->execute([
         ":name" => $name,
         ":description" => $description,
         ":price" => $price,
         ":stock" => $stock,
-        ":id_countries" => $id_countries
+        ":country_id" => $country_id
     ])) {
         return $pdo->lastInsertId(); // <--- DEVUELVE EL ID DEL NUEVO PRODUCTO
     }
@@ -78,9 +85,9 @@ function obtenerProductoPorId($pdo, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function actualizarProducto($pdo, $id, $name, $description, $price, $stock, $id_countries = null) {
+function actualizarProducto($pdo, $id, $name, $description, $price, $stock, $country_id = null) {
     $sql = "UPDATE products 
-            SET name = :name, description = :description, price = :price, stock = :stock, id_countries = :id_countries 
+            SET name = :name, description = :description, price = :price, stock = :stock, country_id = :id_countries 
             WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
@@ -88,7 +95,7 @@ function actualizarProducto($pdo, $id, $name, $description, $price, $stock, $id_
         ":description" => $description,
         ":price" => $price,
         ":stock" => $stock,
-        ":id_countries" => $id_countries,
+        ":country_id" => $country_id,
         ":id" => $id
     ]);
 }
@@ -116,4 +123,45 @@ function obtenerProductosPaginados($pdo, $limite, $offset) {
 function contarProductos($pdo) {
     $stmt = $pdo->query("SELECT COUNT(*) FROM products");
     return $stmt->fetchColumn();
+}
+function obtenerProductosPorPais($pdo, $countryId, $limit, $offset) {
+    $sql = "SELECT p.id, p.name, p.description, p.price, p.provider_id
+            FROM products AS p
+            WHERE p.country_id = :country
+            ORDER BY p.id DESC
+            LIMIT :offset, :limit";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':country', $countryId, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+function contarProductosPorPais($pdo, $countryId) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE country_id = ?");
+    $stmt->execute([$countryId]);
+    return $stmt->fetchColumn();
+}
+// --- PROVEEDORES ---
+function agregarProveedor($pdo, $name, $location, $phone, $imagePath = null) {
+    $sql = "INSERT INTO providers (name, location, phone, image) VALUES (:name, :location, :phone, :image)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ":name" => $name,
+        ":location" => $location,
+        ":phone" => $phone,
+        ":image" => $imagePath
+    ]);
+    return $pdo->lastInsertId();
+}
+
+function obtenerProveedorPorId($pdo, $id) {
+    $stmt = $pdo->prepare("SELECT * FROM providers WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }

@@ -55,7 +55,7 @@
                 </a>
             </li>
         </ul>
-        <a href="../index.php" class="btn btn-back">
+        <a href="../../index.php" class="btn btn-back">
             <i class="fa fa-arrow-left"></i> Back to Login
         </a>
     </div>

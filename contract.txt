@@ -33,4 +33,19 @@ resolver tema de light/dark mode
 css en variables
 
 
+store = listado de paises
+pais = redirecciona a listado de productos
+dentro de productos, agrupar por categoría y ordenar por precio
 
+ramificación
+
+PAISES //
+
+USA = Tecnología
+CHINA = Productos varios
+JAPON = Vehiculos
+ARGENTINA = Agronomía 
+
+cada user del login tiene historial ?
+o cada persona a la hora de comprar, da de altu un usuario 
+en otra tabla, y empieza a contar las compras.
