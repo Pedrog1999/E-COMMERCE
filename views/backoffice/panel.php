@@ -90,7 +90,6 @@ if ($selectedCountry > 0) {
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
-              <th>Stock</th>
               <th>Country</th>
               <th>Image</th>
               <th>Actions</th>
@@ -103,7 +102,6 @@ if ($selectedCountry > 0) {
                   <td><?= htmlspecialchars($p['name']) ?></td>
                   <td><?= htmlspecialchars($p['description']) ?></td>
                   <td>$<?= number_format($p['price'], 2, ',', '.') ?></td>
-                  <td><?= htmlspecialchars($p['stock'] ?? 0) ?></td>
                   <td><?= htmlspecialchars($p['country_name'] ?? '—') ?></td>
                   <td>
                     <?php
@@ -156,7 +154,6 @@ countrySelect.addEventListener('change', async () => {
         <td>${p.name}</td>
         <td>${p.description}</td>
         <td>$${parseFloat(p.price).toFixed(2)}</td>
-        <td>${p.stock}</td>
         <td>${p.country_name ?? '—'}</td>
         <td>
           ${p.first_image

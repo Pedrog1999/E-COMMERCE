@@ -38,10 +38,6 @@ $countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <input type="number" step="0.01" name="price" class="form-control" required>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Stock</label>
-        <input type="number" name="stock" class="form-control" required>
-      </div>
 
       <div class="mb-3">
         <label class="form-label">Country</label>

@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
     $price = floatval($_POST['price']);
-    $stock = intval($_POST['stock']);
     $country_id = isset($_POST['country_id']) ? intval($_POST['country_id']) : null;
 
     $providerId = null;
@@ -49,14 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
         }
 
         // Insertamos el producto
-        $sql = "INSERT INTO products (name, description, price, stock, country_id, provider_id)
-                VALUES (:name, :description, :price, :stock, :country_id, :provider_id)";
+        $sql = "INSERT INTO products (name, description, price, country_id, provider_id)
+                VALUES (:name, :description, :price, :country_id, :provider_id)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ":name" => $name,
             ":description" => $description,
             ":price" => $price,
-            ":stock" => $stock,
             ":country_id" => $country_id,
             ":provider_id" => $providerId
         ]);
