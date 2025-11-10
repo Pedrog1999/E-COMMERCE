@@ -165,3 +165,12 @@ function obtenerProveedorPorId($pdo, $id) {
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function obtenerProductoPorIdd($pdo, $id) {
+    if (!$id) return null;
+    
+    $sql = "SELECT * FROM products WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}

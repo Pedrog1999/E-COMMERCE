@@ -1,0 +1,94 @@
+/* ---------- BASE ---------- */
+body {
+  background-color: #ffffff; /* Fondo blanco puro */
+  font-family: 'Poppins', sans-serif;
+  color: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+/* ---------- TARJETA DE COMPRA ---------- */
+.compra-card {
+  background: linear-gradient(180deg, #2b2b2b, #1f1f1f); /* Gris oscuro elegante */
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 174, 255, 0.15); /* Sombras celestes suaves */
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.compra-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 174, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+/* ---------- TÍTULO ---------- */
+h2 {
+  text-align: center;
+  color: #00aeff;
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+}
+
+/* ---------- CAMPOS DEL FORMULARIO ---------- */
+form label {
+  color: #d8d8d8;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+form input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #2c2c2c;
+  color: #eaeaea;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+form input:focus {
+  border-color: #00aeff;
+  box-shadow: 0 0 8px rgba(0, 174, 255, 0.4);
+  outline: none;
+}
+
+/* ---------- BOTÓN ---------- */
+.btn-comprar {
+  background: linear-gradient(90deg, #00aeff, #66d9ff);
+  border: none;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-comprar:hover {
+  background: linear-gradient(90deg, #66d9ff, #00aeff);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(0, 174, 255, 0.4);
+}
+
+/* ---------- INFO ENVÍO ---------- */
+.envio-info {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .compra-card {
+    padding: 1.8rem;
+  }
+}

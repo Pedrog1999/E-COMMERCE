@@ -13,3 +13,4 @@ INSERT INTO users VALUES
 (1, 'Pedro', 'qwe123qwe', 1);
 (2, 'user', '123123123', 0);
 
+

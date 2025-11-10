@@ -1,0 +1,178 @@
+/* ---------- BASE ---------- */
+body {
+  background: linear-gradient(180deg, #0e1a24, #1b2a38);
+  color: #eaf7ff;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+/* ---------- HEADER ---------- */
+h1 {
+  background: linear-gradient(90deg, #46b0ff, #a3e5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+p {
+  color: #cde8f9;
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ---------- GRID ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* ---------- CARD ---------- */
+.product-card {
+  background: #20394a;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(100,180,255,0.1);
+  text-align: center;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  background: #2b4c5e;
+  box-shadow: 0 0 25px rgba(120,200,255,0.3);
+}
+
+/* ---------- IMAGEN ---------- */
+.product-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 2px solid #3a6d8a;
+  background: #15232d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+  filter: brightness(1.15);
+}
+
+/* ---------- INFO ---------- */
+.product-info {
+  text-align: center;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: #c8e6ff;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.product-price {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #6ed0ff;
+}
+
+/* ---------- BOTÓN COMPRAR ---------- */
+.buy-btn {
+  margin-top: 0.6rem;
+  background: linear-gradient(90deg, #3fa9f5, #72d3ff);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+  background: linear-gradient(90deg, #5ec9ff, #b2ebff);
+  color: #0e1a24;
+  transform: scale(1.05);
+}
+
+/* ---------- PAGINADOR ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+  gap: 10px;
+}
+
+.page-link {
+  background: #27485b;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.page-link:hover,
+.page-link.active {
+  background: #5ec9ff;
+  color: #0e1a24;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+  }
+  .product-card {
+    padding: 1rem;
+  }
+}
+.comprar-btn {
+  background: linear-gradient(135deg, #ff4d4d, #ff1a75);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+  margin-top: 10px;
+}
+.comprar-btn:hover {
+  background: linear-gradient(135deg, #ff1a75, #ff4d4d);
+  transform: scale(1.05);
+}

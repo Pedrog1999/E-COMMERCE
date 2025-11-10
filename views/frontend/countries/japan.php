@@ -38,7 +38,6 @@ require_once '../../../controllers/storeJapanController.php';
       <?php endforeach; ?>
     </div>
 
-    <!-- PAGINADOR -->
     <div class="pagination">
       <?php if ($pagina > 1): ?>
         <a href="?page=<?= $pagina - 1 ?>" class="page-link">&laquo; Anterior</a>
