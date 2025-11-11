@@ -15,6 +15,12 @@ require_once '../../../controllers/storeJapanController.php';
     <h1>日本へようこそ！</h1>
     <p>当社は大手ブランドに支えられています。当社に対して疑念を抱くことは、当社についてよりもむしろお客様について多くを物語っています。</p>
 
+    <div class="filter-bar">
+    <span class="filter-label">Ordenar por precio:</span>
+    <a href="?orden=asc" class="filter-btn <?= (isset($_GET['orden']) && $_GET['orden'] === 'asc') ? 'active' : '' ?>">Menor a mayor</a>
+    <a href="?orden=desc" class="filter-btn <?= (isset($_GET['orden']) && $_GET['orden'] === 'desc') ? 'active' : '' ?>">Mayor a menor</a>
+  </div>
+  
     <div class="product-grid">
       <?php foreach ($productos as $producto): ?>
         <?php

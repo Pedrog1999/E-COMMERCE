@@ -15,6 +15,13 @@ require_once '../../../controllers/storeArgentinaController.php';
     <h1>¡Bienvenido a Argentina!</h1>
     <p>Orgullo, calidad y pasión por lo nuestro. Descubrí los mejores productos argentinos.</p>
     <p>Todos los lotes están expresados en dólares sujetos al valor del día.</p>
+   
+    <div class="filter-bar">
+    <span class="filter-label">Ordenar por precio:</span>
+    <a href="?orden=asc" class="filter-btn <?= (isset($_GET['orden']) && $_GET['orden'] === 'asc') ? 'active' : '' ?>">Menor a mayor</a>
+    <a href="?orden=desc" class="filter-btn <?= (isset($_GET['orden']) && $_GET['orden'] === 'desc') ? 'active' : '' ?>">Mayor a menor</a>
+  </div>
+
 
     <div class="product-grid">
       <?php foreach ($productos as $producto): ?>

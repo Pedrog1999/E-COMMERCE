@@ -174,3 +174,17 @@ function obtenerProductoPorIdd($pdo, $id) {
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function obtenerProductosPorPaisOrdenados($pdo, $country_id, $limit, $offset, $orden = 'asc') {
+    $orden = strtolower($orden) === 'desc' ? 'DESC' : 'ASC';
+    $stmt = $pdo->prepare("
+        SELECT * FROM products 
+        WHERE country_id = :country_id
+        ORDER BY price $orden 
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':country_id', $country_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

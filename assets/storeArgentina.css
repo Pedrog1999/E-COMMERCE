@@ -10,15 +10,17 @@ body {
   padding: 60px 20px;
 }
 
-/* ---------- HEADER ---------- */
+
 h1 {
   background: linear-gradient(90deg, #46b0ff, #a3e5ff);
-  -webkit-background-clip: text;
+  background-clip: text;              /* versión estándar para crhome */
+  -webkit-background-clip: text;      
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   text-align: center;
   margin-bottom: 0.6rem;
 }
+
 
 p {
   color: #cde8f9;
@@ -175,4 +177,40 @@ p {
 .comprar-btn:hover {
   background: linear-gradient(135deg, #ff1a75, #ff4d4d);
   transform: scale(1.05);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 0 30px;
+}
+
+.filter-label {
+  font-weight: 500;
+  color: #ccc;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border: 1px solid #444;
+  border-radius: 20px;
+  background: #1f1f1f;
+  color: #e4e4e4;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+  background: #2a2a2a;
+  border-color: #666;
+}
+
+.filter-btn.active {
+  background: #ffc107;
+  color: #1f1f1f;
+  border-color: #ffc107;
+  font-weight: 600;
 }
