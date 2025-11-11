@@ -1,6 +1,22 @@
 <?php
 require_once '../../models/conexion.php';
 
+session_start();
+if (isset($_SESSION['success'])) {
+    echo "<script>
+        alert('" . addslashes($_SESSION['success']) . "');
+    </script>";
+    unset($_SESSION['success']);
+}
+
+if (isset($_SESSION['error'])) {
+    echo "<script>
+        alert('" . addslashes($_SESSION['error']) . "');
+    </script>";
+    unset($_SESSION['error']);
+}
+
+
 
 $stmt = $pdo->query("SELECT id, name, image_url FROM countries ORDER BY id ASC");
 $countries = $stmt->fetchAll(PDO::FETCH_ASSOC);

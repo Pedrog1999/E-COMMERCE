@@ -1,15 +1,16 @@
 <?php
 require_once '../../models/conexion.php';
 require_once '../../models/funciones.php';
+require_once '../../models/ventasModels.php';
 
-// Obtener país seleccionado (si hay)
+// --- Obtener país seleccionado ---
 $selectedCountry = isset($_GET['country_id']) ? intval($_GET['country_id']) : 0;
 
-// Obtener lista de países
+// --- Obtener lista de países ---
 $stmt = $pdo->query("SELECT id, name FROM countries ORDER BY name ASC");
 $countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Obtener productos (por país o todos)
+// --- Obtener productos ---
 if ($selectedCountry > 0) {
     $productos = $pdo->prepare("
         SELECT p.id, p.name, p.description, p.price, p.stock, c.name AS country_name
@@ -23,6 +24,9 @@ if ($selectedCountry > 0) {
 } else {
     $productos = obtenerProductos($pdo);
 }
+
+// --- Obtener ventas ---
+$ventas = obtenerVentas($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,20 +37,27 @@ if ($selectedCountry > 0) {
   <link rel="stylesheet" href="../../assets/backoffice.css">
   <script src="https://kit.fontawesome.com/a2d0421c23.js" crossorigin="anonymous"></script>
   <style>
-    
     .actions { display:flex; gap:8px; justify-content:center; }
+    .sidebar { width:250px; min-height:100vh; background:#111; color:#fff; padding:20px; }
+    .nav-link { color:#ccc; }
+    .nav-link.active, .nav-link:hover { color:#fff; font-weight:500; }
+    .main-content { background:#1f1f1f; color:#e4e4e4; min-height:100vh; }
+    .btn-edit, .btn-delete { color:#fff; text-decoration:none; }
+    .btn-edit:hover { color:#0dcaf0; }
+    .btn-delete:hover { color:#dc3545; }
   </style>
 </head>
 <body>
   <div class="container-fluid p-0 d-flex">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar d-flex flex-column">
-      <div class="logo mb-4">Panel Admin</div>
+      <div class="logo mb-4 fs-4 fw-bold">Panel Admin</div>
       <nav class="menu nav flex-column gap-2">
-        <a href="panel.php" class="nav-link active d-flex align-items-center">
+        <a href="#" class="nav-link active d-flex align-items-center" onclick="mostrarSeccion('productos')">
           <i class="fa-solid fa-box me-2"></i> Products
         </a>
-        <a href="#" class="nav-link d-flex align-items-center">
+        <a href="#" class="nav-link d-flex align-items-center" onclick="mostrarSeccion('ventas')">
           <i class="fa-solid fa-clock-rotate-left me-2"></i> Sales history
         </a>
         <a href="../../index.php" class="nav-link d-flex align-items-center">
@@ -55,8 +66,11 @@ if ($selectedCountry > 0) {
       </nav>
     </aside>
 
+    <!-- MAIN -->
     <main class="main-content flex-grow-1 p-4">
-      <div class="section active">
+
+      <!-- SECCIÓN PRODUCTOS -->
+      <div class="section" id="productos">
         <h1 class="mb-3">Product management</h1>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -66,7 +80,7 @@ if ($selectedCountry > 0) {
             </a>
           </div>
           <form method="GET" class="d-flex align-items-center">
-            <select name="country_id" class="form-select me-2" style="width: 200px;">
+            <select name="country_id" class="form-select me-2" style="width: 200px;" onchange="this.form.submit()">
               <option value="0">All countries</option>
               <?php foreach ($countries as $country): ?>
                 <option value="<?= $country['id'] ?>" <?= ($selectedCountry === (int)$country['id']) ? 'selected' : '' ?>>
@@ -74,7 +88,6 @@ if ($selectedCountry > 0) {
                 </option>
               <?php endforeach; ?>
             </select>
-            
           </form>
         </div>
 
@@ -115,7 +128,6 @@ if ($selectedCountry > 0) {
                   </td>
                   <td>
                     <div class="actions">
-                      <!-- CORRECCIÓN: usamos $p['id'] y ruta correcta ../../controllers/... -->
                       <a href="editProduct.php?id=<?= $p['id'] ?>" class="btn-edit">
                         <i class="fa-solid fa-pen-to-square me-1"></i> Edit
                       </a>
@@ -136,48 +148,50 @@ if ($selectedCountry > 0) {
           </tbody>
         </table>
       </div>
+
+      <!-- SECCIÓN VENTAS -->
+      <div class="section" id="ventas" style="display:none;">
+        <h1 class="mb-3">Sales history</h1>
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Address</th>
+              <th>Postal Code</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($ventas)): ?>
+              <?php foreach ($ventas as $v): ?>
+                <tr>
+                  <td><?= htmlspecialchars($v['nombre_apellido']) ?></td>
+                  <td><?= htmlspecialchars($v['producto_nombre'] ?? '—') ?></td>
+                  <td>$<?= number_format($v['producto_precio'] ?? 0, 2, ',', '.') ?></td>
+                  <td><?= htmlspecialchars($v['direccion']) ?></td>
+                  <td><?= htmlspecialchars($v['codigo_postal']) ?></td>
+                  <td><?= date('d/m/Y H:i', strtotime($v['fecha_compra'])) ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr><td colspan="7" class="text-center text-muted">No hay ventas registradas.</td></tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+
     </main>
   </div>
-<script>
-const countrySelect = document.querySelector('select[name="country_id"]');
-const tbody = document.querySelector('tbody');
 
-countrySelect.addEventListener('change', async () => {
-  const countryId = countrySelect.value;
-
-  const response = await fetch(`../../controllers/fetchProducts.php?country_id=${countryId}`);
-  const productos = await response.json();
-
-  tbody.innerHTML = productos.length
-    ? productos.map(p => `
-      <tr>
-        <td>${p.name}</td>
-        <td>${p.description}</td>
-        <td>$${parseFloat(p.price).toFixed(2)}</td>
-        <td>${p.country_name ?? '—'}</td>
-        <td>
-          ${p.first_image
-            ? `<img src="../../${p.first_image}" width="80" height="80" style="object-fit:cover;border-radius:6px;">`
-            : `<span class="text-muted">Sin imagen</span>`}
-        </td>
-        <td>
-          <div class="actions">
-            <a href="editProduct.php?id=${p.id}" class="btn-edit">
-              <i class="fa-solid fa-pen-to-square me-1"></i> Edit
-            </a>
-            <a href="../../controllers/productsController.php?delete=${p.id}"
-               class="btn-delete"
-               onclick="return confirm('¿Seguro que querés eliminar este producto?');">
-              <i class="fa-solid fa-trash me-1"></i> Delete
-            </a>
-          </div>
-        </td>
-      </tr>
-    `).join('')
-    : `<tr><td colspan="7" class="text-center text-muted">No hay productos cargados.</td></tr>`;
-});
-</script>
-
-
+  <script>
+  function mostrarSeccion(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    event.target.closest('.nav-link').classList.add('active');
+  }
+  </script>
 </body>
 </html>

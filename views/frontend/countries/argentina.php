@@ -14,6 +14,7 @@ require_once '../../../controllers/storeArgentinaController.php';
   <div class="container">
     <h1>¡Bienvenido a Argentina!</h1>
     <p>Orgullo, calidad y pasión por lo nuestro. Descubrí los mejores productos argentinos.</p>
+    <p>Todos los lotes están expresados en dólares sujetos al valor del día.</p>
 
     <div class="product-grid">
       <?php foreach ($productos as $producto): ?>
@@ -30,7 +31,7 @@ require_once '../../../controllers/storeArgentinaController.php';
             <p class="product-desc"><?= htmlspecialchars($producto['description']) ?></p>
             <span class="product-price">$<?= number_format($producto['price'], 2) ?></span>
            <button class="comprar-btn" onclick="window.location.href='../compra.php?id=<?= $producto['id'] ?>'">
-  🛒 Comprar ahora
+   Comprar ahora
 </button>
 
           </div>
@@ -54,19 +55,7 @@ require_once '../../../controllers/storeArgentinaController.php';
   </div>
 
 
-<?php
-session_start();
 
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success text-center" style="margin:20px;">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger text-center" style="margin:20px;">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']);
-}
-?>
 
 </body>
 

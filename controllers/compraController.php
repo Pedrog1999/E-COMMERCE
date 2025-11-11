@@ -17,25 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$product_id, $nombre_apellido, $tarjeta, $codigo_postal, $direccion]);
 
-            // Marcar producto como vendido
-            $update = $pdo->prepare("UPDATE products SET estado = 'vendido' WHERE id = ?");
-            $update->execute([$product_id]);
-
             // Mensaje de éxito
             $_SESSION['success'] = "✅ COMPRA EXITOSA, PUEDE SEGUIR EXPLORANDO LOS PRODUCTOS.";
 
-            // Redirigir a la página de Argentina
-            header("Location: ../views/frontend/countries/argentina.php");
+            // Limpieza de buffer por si hay salida previa
+            if (ob_get_length()) ob_end_clean();
+
+            // Redirigir al store general
+            header("Location: ../views/frontend/store.php");
             exit;
 
         } catch (PDOException $e) {
             $_SESSION['error'] = "❌ Error al registrar la compra: " . $e->getMessage();
+            if (ob_get_length()) ob_end_clean();
+            header("Location: ../views/frontend/compra.php?id=" . $product_id);
+            exit;
         }
     } else {
         $_SESSION['error'] = "⚠️ Por favor completá todos los campos.";
+        if (ob_get_length()) ob_end_clean();
+        header("Location: ../views/frontend/compra.php?id=" . $product_id);
+        exit;
     }
 }
-
-// Si hubo error, redirige de nuevo al formulario
-header("Location: ../views/frontend/compra.php?id=" . $product_id);
-exit;
