@@ -16,6 +16,33 @@ if (isset($_GET['delete'])) {
         exit;
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateProduct'])) {
+    $id = intval($_POST['id']);
+    $name = trim($_POST['name']);
+    $description = trim($_POST['description']);
+    $price = floatval($_POST['price']);
+
+    try {
+        $sql = "UPDATE products 
+                SET name = :name, description = :description, price = :price 
+                WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':price' => $price,
+            ':id' => $id
+        ]);
+
+        header("Location: ../views/backoffice/panel.php?updated=1");
+        exit;
+
+    } catch (Exception $e) {
+        error_log("Error al actualizar producto: " . $e->getMessage());
+        header("Location: ../views/backoffice/editProduct.php?id=$id&error=1");
+        exit;
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
     $name = trim($_POST['name']);
@@ -88,3 +115,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
         exit;
     }
 }
+// ✅ Si viene un POST con updateProduct → actualizar producto existente

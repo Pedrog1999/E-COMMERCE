@@ -95,7 +95,10 @@ $ventas = obtenerVentas($pdo);
           <div class="alert alert-success">The product was added successfully.</div>
         <?php elseif (isset($_GET['deleted'])): ?>
           <div class="alert alert-warning">The product was deleted successfully.</div>
+          <?php elseif (isset($_GET['updated'])): ?>
+          <div class="alert alert-info">El producto fue actualizado correctamente.</div>
         <?php endif; ?>
+        
 
         <table class="table table-dark table-striped">
           <thead>
